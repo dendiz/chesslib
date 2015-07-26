@@ -11,4 +11,12 @@ public class Piece {
         this.ptype = ptype;
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "Piece{" +
+                "ptype='" + ptype + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

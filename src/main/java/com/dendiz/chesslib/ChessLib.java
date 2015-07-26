@@ -31,7 +31,7 @@ public class ChessLib {
         put(BISHOP, Arrays.asList(-17, -15, 17, 15));
         put(ROOK, Arrays.asList(-16, 1, 16, -1));
         put(QUEEN, Arrays.asList(-17, -16, -15, 1, 17, 16, 15, -1));
-        put(KING, Arrays.asList(-18, -33, -31, -14, 18, 33, 31, 14));
+        put(KING, Arrays.asList(-17, -16, -15, 1, 17, 16, 15, -1));
     }};
 
     List<Integer> ATTACKS = Arrays.asList(
@@ -340,7 +340,7 @@ public class ChessLib {
             }
         }
 
-        turn = tokens[2];
+        turn = tokens[1];
         if (tokens[2].indexOf("K") > -1) {
             Integer w = castling.get(WHITE);
             castling.put("w", w | BITS.get(KSIDE_CASTLE));
@@ -588,6 +588,7 @@ public class ChessLib {
     }
 
     private void add_move(Piece[] board, List<Move> moves, int from, int to, int flags) {
+        System.err.println("board[from]" + board[from] + " from: " + from + " to:" + to);
         if (board[from].ptype.equals(PAWN) && (rank(to) == RANK_8 || rank(to) == RANK_1)) {
             List<String> pieces = Arrays.asList(QUEEN, ROOK, BISHOP, KNIGHT);
             for (String piece : pieces) {
@@ -620,7 +621,7 @@ public class ChessLib {
             single_square = true;
         }
 
-        for (int i = first_sq; i < last_sq; i++) {
+        for (int i = first_sq; i <= last_sq; i++) {
             if ((i & 0x88) > 0) {
                 i += 7;
                 continue;
@@ -641,7 +642,7 @@ public class ChessLib {
                 }
                 //pawn capture
                 for (int j = 2; j < 4; j++) {
-                    int square3 = i + PAWN_OFFSETS.get(us).get(1);
+                    int square3 = i + PAWN_OFFSETS.get(us).get(j);
                     if ((square3 & 0x88) > 0) continue;
                     if (board[square3] != null && board[square3].color.equals(them)) {
                         add_move(board, moves, i, square3, BITS.get(CAPTURE));

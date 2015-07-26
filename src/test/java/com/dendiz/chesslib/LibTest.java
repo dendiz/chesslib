@@ -44,6 +44,114 @@ public class LibTest {
     }
 
     @Test
+    public void testFen1() {
+        chessLib.load("2r2rk1/p5pp/1p2pp2/b2p4/2qPn3/PRPNP3/2Q2PPP/2R1B1K1 b - - 5 6");
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("a8")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b8")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("c8")].color);
+        assertEquals("r", chessLib.board[chessLib.SQUARES.get("c8")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("d8")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("e8")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("f8")].color);
+        assertEquals("r", chessLib.board[chessLib.SQUARES.get("f8")].ptype);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("g8")].color);
+        assertEquals("k", chessLib.board[chessLib.SQUARES.get("g8")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h8")]);
+
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("a7")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("a7")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b7")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("c7")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("d7")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("e7")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("f7")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("g7")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("g7")].ptype);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("h7")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("h7")].ptype);
+
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("a6")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("b6")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("b6")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("c6")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("d6")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("e6")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("e6")].ptype);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("f6")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("f6")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("g6")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h6")]);
+
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("a5")].color);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("a5")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b5")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("c5")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("d5")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("d5")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("e5")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("f5")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("g5")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h5")]);
+
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("a4")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b4")]);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("c4")].color);
+        assertEquals("q", chessLib.board[chessLib.SQUARES.get("c4")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("d4")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("d4")].ptype);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("e4")].color);
+        assertEquals("n", chessLib.board[chessLib.SQUARES.get("e4")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("f4")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("g4")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h4")]);
+
+
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("a3")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("a3")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("b3")].color);
+        assertEquals("r", chessLib.board[chessLib.SQUARES.get("b3")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("c3")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("c3")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("d3")].color);
+        assertEquals("n", chessLib.board[chessLib.SQUARES.get("d3")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("e3")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("e3")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("f3")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("g3")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h3")]);
+
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("a2")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b2")]);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("c2")].color);
+        assertEquals("q", chessLib.board[chessLib.SQUARES.get("c2")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("d2")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("e2")]);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("f2")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("f2")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("g2")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("g2")].ptype);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("h2")].color);
+        assertEquals("p", chessLib.board[chessLib.SQUARES.get("h2")].ptype);
+
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("a1")]);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("b1")]);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("c1")].color);
+        assertEquals("r", chessLib.board[chessLib.SQUARES.get("c1")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("d1")]);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("e1")].color);
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("e1")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("f1")]);
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("g1")].color);
+        assertEquals("k", chessLib.board[chessLib.SQUARES.get("g1")].ptype);
+        assertEquals(null, chessLib.board[chessLib.SQUARES.get("h1")]);
+    }
+
+    @Test
+    public void testFirstTurn() {
+        chessLib.reset();
+        assertEquals("w", chessLib.turn());
+    }
+    @Test
     public void test1() {
         chessLib.reset();
         Move e4 = chessLib.move("e4");
