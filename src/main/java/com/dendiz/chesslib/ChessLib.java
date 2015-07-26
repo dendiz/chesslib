@@ -588,7 +588,6 @@ public class ChessLib {
     }
 
     private void add_move(Piece[] board, List<Move> moves, int from, int to, int flags) {
-        System.err.println("board[from]" + board[from] + " from: " + from + " to:" + to);
         if (board[from].ptype.equals(PAWN) && (rank(to) == RANK_8 || rank(to) == RANK_1)) {
             List<String> pieces = Arrays.asList(QUEEN, ROOK, BISHOP, KNIGHT);
             for (String piece : pieces) {

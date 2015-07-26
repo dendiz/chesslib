@@ -3,6 +3,8 @@ package com.dendiz.chesslib;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -151,12 +153,34 @@ public class LibTest {
         chessLib.reset();
         assertEquals("w", chessLib.turn());
     }
+
+    @Test
+    public void testBeginningMoveGeneration() {
+        chessLib.reset();
+        List<Move> moves = chessLib.moves();
+        assertEquals(20, moves.size());
+    }
+
+    @Test
+    public void testCheckMate() {
+        chessLib.load("2rq1rk1/pp3ppQ/4p3/b2p2N1/3P4/P1P1P3/3B1PPP/R4RK1 b - - 1 1");
+        assertTrue(chessLib.in_checkmate());
+        assertTrue(chessLib.in_check());
+    }
+
+    @Test
+    public void testStaleMate() {
+        chessLib.load("7k/5K2/6Q1/8/8/8/8/8 b - - 0 1");
+        assertTrue(chessLib.in_stalemate());
+        assertTrue(chessLib.in_draw());
+    }
     @Test
     public void test1() {
         chessLib.reset();
         Move e4 = chessLib.move("e4");
         assertEquals("p" ,e4.piece);
         assertEquals("e4" ,e4.san);
+        assertEquals("w" ,e4.color);
 
     }
 }
