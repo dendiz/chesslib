@@ -369,7 +369,7 @@ public class ChessLib {
     private String generate_fen() {
         int empty = 0;
         String fen = "";
-        for (int i = SQUARES.get("a8"); i < SQUARES.get("h1"); i++) {
+        for (int i = SQUARES.get("a8"); i <= SQUARES.get("h1"); i++) {
             if (board[i] == null) {
                 empty++;
             } else {
@@ -414,7 +414,7 @@ public class ChessLib {
                 .append(cflags).append(" ")
                 .append(epflags).append(" ")
                 .append(half_moves).append(" ")
-                .append(move_number).append(" ").toString();
+                .append(move_number).toString();
     }
 
     private boolean isNaN(char c) {

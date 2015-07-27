@@ -394,6 +394,30 @@ public class LibTest {
 
     }
 
+    @Test
+    public void testFens() {
+        List<String> pos = Arrays.asList("8/8/8/8/8/8/8/8 w - - 0 1",
+                "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+                "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1",
+                "1nbqkbn1/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/1NBQKBN1 b - - 1 2"
+        );
+        for (String po : pos) {
+            chessLib.load(po);
+            assertEquals(po, chessLib.fen());
+        }
+    }
+
+    @Test
+    public void testfensBad() {
+        List<String> pos = Arrays.asList("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBN w KQkq - 0 1",
+                "rnbqkbnr/pppppppp/9/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+                "1nbqkbn1/pppp1ppX/8/4p3/4P3/8/PPPP1PPP/1NBQKBN1 b - - 1 2"
+        );
+        for (String po : pos) {
+            chessLib.load(po);
+            assertEquals("8/8/8/8/8/8/8/8 w - - 0 1", chessLib.fen());
+        }
+    }
 
 
     @Test
