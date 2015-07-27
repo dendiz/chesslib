@@ -6,15 +6,15 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class ChessLib {
-    String BLACK = "b";
-    String WHITE = "w";
+    public static String BLACK = "b";
+    public static String WHITE = "w";
     int EMPTY = -1;
-    String PAWN = "p";
-    String KNIGHT = "n";
-    String BISHOP = "b";
-    String ROOK = "r";
-    String QUEEN = "q";
-    String KING = "k";
+    public static String PAWN = "p";
+    public static String KNIGHT = "n";
+    public static String BISHOP = "b";
+    public static String ROOK = "r";
+    public static String QUEEN = "q";
+    public static String KING = "k";
 
     String SYMBOLS = "pnbrqkPNBRQK";
     String DEFAULT_POSITION = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -114,7 +114,7 @@ public class ChessLib {
     int RANK_7 = 1;
     int RANK_8 = 0;
 
-    public Map<String, Integer> SQUARES = new HashMap<String, Integer>() {{
+    public static Map<String, Integer> SQUARES = new HashMap<String, Integer>() {{
         put("a8", 0);
         put("b8", 1);
         put("c8", 2);
@@ -218,8 +218,8 @@ public class ChessLib {
 
     String turn = WHITE;
     Map<String, Integer> castling = new HashMap<String, Integer>() {{
-        put(WHITE, EMPTY);
-        put(BLACK, EMPTY);
+        put(WHITE, 0);
+        put(BLACK, 0);
     }};
 
     int ep_square = EMPTY;
@@ -263,8 +263,8 @@ public class ChessLib {
         }};
         turn = WHITE;
         castling = new HashMap<String, Integer>() {{
-            put(WHITE, EMPTY);
-            put(BLACK, EMPTY);
+            put(WHITE, 0);
+            put(BLACK, 0);
         }};
         ep_square = EMPTY;
         half_moves = 0;
@@ -1027,7 +1027,7 @@ public class ChessLib {
 
 
     private boolean attacked(String color, int square) {
-        for (int i = SQUARES.get("a8"); i < SQUARES.get("h1"); i++) {
+        for (int i = SQUARES.get("a8"); i <= SQUARES.get("h1"); i++) {
 
             if ((i & 0x88) > 0) {
                 i += 7;
@@ -1111,6 +1111,7 @@ public class ChessLib {
     private String algebraic(int i) {
         int f = file(i);
         int r = rank(i);
+        //System.out.println("f:"+ f + " r:" + r);
         return "abcdefgh".substring(f, f + 1) + "87654321".substring(r, r + 1);
 
     }

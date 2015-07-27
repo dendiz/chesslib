@@ -29,4 +29,13 @@ public class Move {
     public static Move copy(Move move) {
         return new Move(move.color, move.from, move.to, move.flags, move.piece, move.promotion, move.captured);
     }
+
+    @Override
+    public String toString() {
+        return "Move{" +
+                "from=" + from +
+                ", to=" + to +
+                ", san='" + san + '\'' +
+                '}';
+    }
 }
