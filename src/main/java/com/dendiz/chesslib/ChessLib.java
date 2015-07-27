@@ -789,14 +789,18 @@ public class ChessLib {
         }
 
         if (num_pieces == 2) return true;
-        else if (num_pieces == 3 && (pieces.get(BISHOP) == 1 || pieces.get(KNIGHT) == 1)) return true;
-        else if (num_pieces == pieces.get(BISHOP) + 2) {
-            int sum = 0;
-            int len = bishops.size();
-            for (int i = 0; i < len; i++) {
-                sum += bishops.get(i);
+        else {
+            Integer b = pieces.get(BISHOP) == null ? 0 : pieces.get(BISHOP);
+            Integer k = pieces.get(KNIGHT) == null ? 9 : pieces.get(KNIGHT);
+            if (num_pieces == 3 && (b == 1 || k == 1)) return true;
+            else if (num_pieces == b + 2) {
+                int sum = 0;
+                int len = bishops.size();
+                for (int i = 0; i < len; i++) {
+                    sum += bishops.get(i);
+                }
+                if (sum == 0 || sum == len) return true;
             }
-            if (sum == 0 || sum == len) return true;
         }
 
         return false;
@@ -888,6 +892,7 @@ public class ChessLib {
     }
 
     private Move undo_move() {
+        if (history.empty()) return null;
         HistoryItem old = history.pop();
         if (old == null) return null;
         Move move = old.move;
@@ -1065,7 +1070,16 @@ public class ChessLib {
     }
 
     private void push(Move move) {
-        HistoryItem item = new HistoryItem(move, kings, turn, castling, ep_square, half_moves, move_number);
+
+        Map<String, Integer> kings = new HashMap<>();
+        kings.putAll(this.kings);
+
+
+        Map<String, Integer> castling = new HashMap<>();
+        castling.putAll(this.castling);
+
+
+        HistoryItem item = new HistoryItem(Move.copy(move), kings, new String(turn), castling, new Integer(ep_square), new Integer(half_moves), new Integer(move_number));
         history.push(item);
 
     }

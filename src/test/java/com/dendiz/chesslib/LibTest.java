@@ -148,6 +148,21 @@ public class LibTest {
         assertEquals(null, chessLib.board[chessLib.SQUARES.get("h1")]);
     }
 
+
+    @Test
+    public void testfen2() {
+        chessLib.load("7k/5K2/6Q1/8/8/8/8/8 b - - 0 1");
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("f7")].color);
+        assertEquals("k", chessLib.board[chessLib.SQUARES.get("f7")].ptype);
+
+        assertEquals("b", chessLib.board[chessLib.SQUARES.get("h8")].color);
+        assertEquals("k", chessLib.board[chessLib.SQUARES.get("h8")].ptype);
+
+        assertEquals("w", chessLib.board[chessLib.SQUARES.get("g6")].color);
+        assertEquals("q", chessLib.board[chessLib.SQUARES.get("g6")].ptype);
+
+    }
+
     @Test
     public void testFirstTurn() {
         chessLib.reset();
