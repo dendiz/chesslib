@@ -232,6 +232,28 @@ public class ChessLib {
         return turn;
     }
 
+    public Move move(String from, String to) {
+        List<Move> moves = generate_moves();
+        Move targetMove = null;
+        for (Move move : moves) {
+            if (algebraic(move.from).equals(from) && algebraic(move.to).equals(to)) {
+                targetMove = move;
+                break;
+            }
+        }
+        return move(targetMove);
+    }
+
+    public Move move(Move move) {
+        if (move == null) {
+            return null;
+        }
+        Move pretty_move = make_pretty(move);
+        make_move(move);
+        return pretty_move;
+
+    }
+
     public Move move(String move) {
         List<Move> moves = generate_moves();
         Move move_obj = null;
@@ -242,12 +264,7 @@ public class ChessLib {
                 break;
             }
         }
-        if (move_obj == null) {
-            return null;
-        }
-        Move pretty_move = make_pretty(move_obj);
-        make_move(move_obj);
-        return pretty_move;
+        return move(move_obj);
     }
 
     public Move undo() {
@@ -393,16 +410,16 @@ public class ChessLib {
             }
         }
         String cflags = "";
-        if ((castling.get(WHITE) & BITS.get(KSIDE_CASTLE)) > 0) {
+        if (castling.containsKey(WHITE) &&  (castling.get(WHITE) & BITS.get(KSIDE_CASTLE)) > 0) {
             cflags += "K";
         }
-        if ((castling.get(WHITE) & BITS.get(QSIDE_CASTLE)) > 0) {
+        if (castling.containsKey(WHITE) &&  (castling.get(WHITE) & BITS.get(QSIDE_CASTLE)) > 0) {
             cflags += "Q";
         }
-        if ((castling.get(BLACK) & BITS.get(KSIDE_CASTLE)) > 0) {
+        if (castling.containsKey(BLACK) &&  (castling.get(BLACK) & BITS.get(KSIDE_CASTLE)) > 0) {
             cflags += "k";
         }
-        if ((castling.get(BLACK) & BITS.get(QSIDE_CASTLE)) > 0) {
+        if (castling.containsKey(BLACK) && (castling.get(BLACK) & BITS.get(QSIDE_CASTLE)) > 0) {
             cflags += "q";
         }
         if (cflags.equals("")) cflags = "-";
@@ -672,7 +689,7 @@ public class ChessLib {
         }
 
         if ((!single_square) || last_sq == kings.get(us)) {
-            if ((castling.get(us) & BITS.get(KSIDE_CASTLE)) > 0) {
+            if (castling.containsKey(us) && (castling.get(us) & BITS.get(KSIDE_CASTLE)) > 0) {
                 Integer castling_from = kings.get(us);
                 int castling_to = castling_from + 2;
 
@@ -685,7 +702,7 @@ public class ChessLib {
                 }
             }
 
-            if ((castling.get(us) & BITS.get(QSIDE_CASTLE)) > 0) {
+            if (castling.containsKey(us) &&  (castling.get(us) & BITS.get(QSIDE_CASTLE)) > 0) {
                 Integer castling_from = kings.get(us);
                 int castling_to = castling_from - 2;
                 if (board[castling_from - 1] == null && board[castling_from - 2] == null && board[castling_from - 3] == null &&
@@ -975,11 +992,11 @@ public class ChessLib {
                 board[castling_from] = null;
             }
 
-            castling.put(us, -1);
+            castling.remove(us);
 
         }
 
-        if (castling.get(us) > -1) {
+        if (castling.containsKey(us) && castling.get(us) > -1) {
             for (int i = 0; i < ROOKS.get(us).size(); i++) {
                 if (move.from == ROOKS.get(us).get(i).get("square") &&
                         (castling.get(us) & ROOKS.get(us).get(i).get("flag")) > 0) {
@@ -990,7 +1007,7 @@ public class ChessLib {
             }
         }
 
-        if (castling.get(them) > -1) {
+        if (castling.containsKey(them) && castling.get(them) > -1) {
             for (int i = 0; i < ROOKS.get(them).size(); i++) {
                 if (move.to == ROOKS.get(them).get(i).get("square") &&
                         (castling.get(them) & ROOKS.get(them).get(i).get("flag")) > 0) {

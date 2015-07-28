@@ -597,8 +597,15 @@ public class LibTest {
         List<Move> history = chessLib.history();
         assertEquals(moves.size(), history.size());
         for (int i = 0; i < moves.size(); i++) {
-            assertEquals(moves.get(i), history.get(i));
+            assertEquals(moves.get(i), history.get(i).san);
         }
+    }
+
+    @Test
+    public void testCastlingFlag(){
+        chessLib.load("b3k2r/5p2/4p3/1p5p/6p1/2PR2P1/BP3qNP/6QK b k - 2 28");
+        chessLib.move("a8", "g2");
+        assertEquals("4k2r/5p2/4p3/1p5p/6p1/2PR2P1/BP3qbP/6QK w k - 0 29", chessLib.fen());
     }
 
     @Test
