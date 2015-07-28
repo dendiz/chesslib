@@ -912,10 +912,14 @@ public class ChessLib {
         if (history.empty()) return null;
         HistoryItem old = history.pop();
         if (old == null) return null;
-        Move move = old.move;
-        kings = old.kings;
+        Move move = Move.copy(old.move);
+        kings.clear();
+        kings.putAll(old.kings);
         turn = old.turn;
-        castling = old.castling;
+
+        castling.clear();
+        castling.putAll(old.castling);
+
         ep_square = old.ep_square;
         half_moves = old.half_moves;
         move_number = old.move_number;
@@ -1132,5 +1136,7 @@ public class ChessLib {
         return "abcdefgh".substring(f, f + 1) + "87654321".substring(r, r + 1);
 
     }
+
+
 
 }

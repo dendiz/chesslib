@@ -22,6 +22,13 @@ public class LibTest {
     }
 
     @Test
+    public void testPos1() {
+        chessLib.load("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1");
+        List<Move> moves = chessLib.moves();
+        System.out.println(moves.size());
+    }
+
+    @Test
     public void testStartPosition() {
         chessLib.reset();
         char[] pi = new char[]{'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'};
