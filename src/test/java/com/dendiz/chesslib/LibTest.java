@@ -325,19 +325,20 @@ public class LibTest {
         pieces.put("a7", new Piece(ChessLib.PAWN, ChessLib.WHITE));
         pieces.put("b7", new Piece(ChessLib.PAWN, ChessLib.BLACK));
         pieces.put("c7", new Piece(ChessLib.KNIGHT, ChessLib.BLACK));
-        pieces.put("d7", new Piece(ChessLib.KNIGHT, ChessLib.BLACK));
+        pieces.put("d7", new Piece(ChessLib.KNIGHT, ChessLib.WHITE));
         pieces.put("e7", new Piece(ChessLib.BISHOP, ChessLib.BLACK));
-        pieces.put("f7", new Piece(ChessLib.BISHOP, ChessLib.BLACK));
+        pieces.put("f7", new Piece(ChessLib.BISHOP, ChessLib.WHITE));
         pieces.put("g7", new Piece(ChessLib.ROOK, ChessLib.BLACK));
-        pieces.put("h7", new Piece(ChessLib.ROOK, ChessLib.BLACK));
+        pieces.put("h7", new Piece(ChessLib.ROOK, ChessLib.WHITE));
         pieces.put("a6", new Piece(ChessLib.QUEEN, ChessLib.BLACK));
-        pieces.put("b6", new Piece(ChessLib.QUEEN, ChessLib.BLACK));
+        pieces.put("b6", new Piece(ChessLib.QUEEN, ChessLib.WHITE));
         pieces.put("a4", new Piece(ChessLib.KING, ChessLib.BLACK));
-        pieces.put("h4", new Piece(ChessLib.KING, ChessLib.BLACK));
+        pieces.put("h4", new Piece(ChessLib.KING, ChessLib.WHITE));
 
 
         chessLib.clear();
         for (String sq : pieces.keySet()) {
+            System.out.println("sq :" + sq);
             assertTrue(chessLib.put(pieces.get(sq), sq));
         }
 
