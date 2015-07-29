@@ -379,31 +379,31 @@ public class ChessLib {
         ep_square = Objects.equals(tokens[3], "-") ? EMPTY : SQUARES.get(tokens[3]);
         half_moves = Integer.parseInt(tokens[4]);
         move_number = Integer.parseInt(tokens[5]);
-        update_setup(generate_fen());
+        //update_setup(generate_fen());
         return true;
     }
 
     private String generate_fen() {
         int empty = 0;
-        String fen = "";
+        StringBuilder fen = new StringBuilder();
         for (int i = SQUARES.get("a8"); i <= SQUARES.get("h1"); i++) {
             if (board[i] == null) {
                 empty++;
             } else {
                 if (empty > 0) {
-                    fen += empty;
+                    fen.append(empty);
                     empty = 0;
                 }
                 String color = board[i].color;
                 String ptype = board[i].ptype;
-                fen += color.equals(WHITE) ? ptype.toUpperCase() : ptype.toLowerCase();
+                fen.append( color.equals(WHITE) ? ptype.toUpperCase() : ptype.toLowerCase() );
             }
             if (((i + 1) & 0x88) > 0) {
                 if (empty > 0) {
-                    fen += empty;
+                    fen.append( empty );
                 }
                 if (i != SQUARES.get("h1")) {
-                    fen += "/";
+                    fen.append( "/" );
                 }
                 empty = 0;
                 i += 8;
@@ -450,21 +450,21 @@ public class ChessLib {
         return generate_fen();
     }
 
-
+    List<String> errors = Arrays.asList(
+            "No errors.",
+            "FEN string must contain six space-delimited fields.",
+            "6th field (move number) must be a positive integer.",
+            "5th field (half move counter) must be a non-negative integer.",
+            "4th field (en-passant square) is invalid.",
+            "3rd field (castling availability) is invalid.",
+            "2nd field (side to move) is invalid.",
+            "1st field (piece positions) does not contain 8 \"/\"-delimited rows.",
+            "1st field (piece positions) is invalid [consecutive numbers].",
+            "1st field (piece positions) is invalid [invalid piece].",
+            "1st field (piece positions) is invalid [row too large]."
+    );
     public ValidateResult validate_fen(String fen) {
-        List<String> errors = Arrays.asList(
-                "No errors.",
-                "FEN string must contain six space-delimited fields.",
-                "6th field (move number) must be a positive integer.",
-                "5th field (half move counter) must be a non-negative integer.",
-                "4th field (en-passant square) is invalid.",
-                "3rd field (castling availability) is invalid.",
-                "2nd field (side to move) is invalid.",
-                "1st field (piece positions) does not contain 8 \"/\"-delimited rows.",
-                "1st field (piece positions) is invalid [consecutive numbers].",
-                "1st field (piece positions) is invalid [invalid piece].",
-                "1st field (piece positions) is invalid [row too large]."
-        );
+
         String[] tokens = fen.split("\\s+");
 
         if (tokens.length != 6) {

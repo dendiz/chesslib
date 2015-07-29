@@ -3,9 +3,7 @@ package com.dendiz.chesslib;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -20,6 +18,45 @@ public class LibTest {
     public void before() {
         chessLib = new ChessLib();
     }
+
+
+
+    @Test
+    public void perfTest() {
+        //chessLib.load("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1");
+        long start = System.currentTimeMillis();
+        Queue<String> queue = new ArrayDeque<String>();
+        queue.add("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1");
+        List<String> result = new ArrayList<String>();
+        int depth = 0;
+        while(true) {
+            int nodeCount = queue.size();
+            if (nodeCount == 0) break;
+            while(nodeCount > 0) {
+                String fen = queue.poll();
+                chessLib.load(fen);
+                List<Move> moves = chessLib.moves();
+                for (Move move : moves) {
+                    chessLib.move(move);
+                    String fen1 = chessLib.fen();
+                    queue.add(fen1);
+                    result.add(fen1);
+                    chessLib.undo();
+                }
+                nodeCount--;
+            }
+            depth++;
+            if (depth == 4) break;
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("generated " + result.size() + " positions");
+        long res = end -start;
+        System.out.println("time: " + res + " ms");
+
+    }
+
+
+
 
     @Test
     public void testPos1() {
