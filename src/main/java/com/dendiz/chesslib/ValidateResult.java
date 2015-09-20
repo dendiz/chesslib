@@ -1,9 +1,11 @@
 package com.dendiz.chesslib;
 
+import java.io.Serializable;
+
 /**
  * Created by dendiz on 25/07/15.
  */
-public class ValidateResult {
+public class ValidateResult implements Serializable {
     public boolean valid = false;
     public int error_number;
     public String error;

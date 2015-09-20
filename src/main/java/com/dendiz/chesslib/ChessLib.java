@@ -2,10 +2,12 @@ package com.dendiz.chesslib;
 
 import com.google.common.collect.ImmutableMap;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class ChessLib {
+public class ChessLib implements Serializable {
+
     public static String BLACK = "b";
     public static String WHITE = "w";
     int EMPTY = -1;
@@ -497,11 +499,11 @@ public class ChessLib {
             return new ValidateResult(false, 7, errors.get(7));
         }
 
-        for (int i = 0; i < rows.length; i++) {
+        for (String row : rows) {
             int sum_fields = 0;
             boolean previous_was_number = false;
-            for (int k = 0; k < rows[i].length(); k++) {
-                char[] rowsi = rows[i].toCharArray();
+            for (int k = 0; k < row.length(); k++) {
+                char[] rowsi = row.toCharArray();
                 if (!isNaN(rowsi[k])) {
                     if (previous_was_number) {
                         return new ValidateResult(false, 8, errors.get(8));
@@ -615,7 +617,7 @@ public class ChessLib {
         }
     }
 
-    private List<Move> generate_moves(Map<String, String> options) {
+    private List generate_moves(Map<String, String> options) {
         List<Move> moves = new ArrayList<>();
         String us = turn;
         String them = swap_color(us);
@@ -688,7 +690,7 @@ public class ChessLib {
             }
         }
 
-        if ((!single_square) || last_sq == kings.get(us)) {
+        if ((!single_square) || Objects.equals(last_sq, kings.get(us))) {
             if (castling.containsKey(us) && (castling.get(us) & BITS.get(KSIDE_CASTLE)) > 0) {
                 Integer castling_from = kings.get(us);
                 int castling_to = castling_from + 2;
@@ -718,10 +720,10 @@ public class ChessLib {
         }
 
         List<Move> legal_moves = new ArrayList<>();
-        for (int i = 0; i < moves.size(); i++) {
-            make_move(moves.get(i));
+        for (Move move : moves) {
+            make_move(move);
             if (!king_attacked(us)) {
-                legal_moves.add(moves.get(i));
+                legal_moves.add(move);
             }
             undo_move();
         }
@@ -813,8 +815,8 @@ public class ChessLib {
             else if (num_pieces == b + 2) {
                 int sum = 0;
                 int len = bishops.size();
-                for (int i = 0; i < len; i++) {
-                    sum += bishops.get(i);
+                for (Integer bishop : bishops) {
+                    sum += bishop;
                 }
                 if (sum == 0 || sum == len) return true;
             }
@@ -853,7 +855,7 @@ public class ChessLib {
     }
 
     private <T> String join(List<T> list, String del) {
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (i > 0) output.append(del);
             output.append(list.get(i));
@@ -874,10 +876,10 @@ public class ChessLib {
         int same_rank = 0;
         int same_file = 0;
 
-        for (int i = 0; i < moves.size(); i++) {
-            int ambig_from = moves.get(i).from;
-            int ambig_to = moves.get(i).to;
-            String ambig_piece = moves.get(i).piece;
+        for (Move move1 : moves) {
+            int ambig_from = move1.from;
+            int ambig_to = move1.to;
+            String ambig_piece = move1.piece;
             if (piece.equals(ambig_piece) && from != ambig_from && to == ambig_to) {
                 ambiguities++;
                 if (rank(from) == rank(ambig_from)) {
@@ -933,7 +935,7 @@ public class ChessLib {
         if ((move.flags & BITS.get(CAPTURE)) > 0) {
             board[move.to] = new Piece(move.captured, them);
         } else if ((move.flags & BITS.get(EP_CAPTURE)) > 0) {
-            int index = 0;
+            int index;
             if (us.equals(BLACK)) {
                 index = move.to - 16;
             } else {
@@ -1100,13 +1102,13 @@ public class ChessLib {
         castling.putAll(this.castling);
 
 
-        HistoryItem item = new HistoryItem(Move.copy(move), kings, new String(turn), castling, new Integer(ep_square), new Integer(half_moves), new Integer(move_number));
+        HistoryItem item = new HistoryItem(Move.copy(move), kings, turn, castling, ep_square, half_moves, move_number);
         history.push(item);
 
     }
 
     public boolean put(Piece piece, String square) {
-        if (SYMBOLS.indexOf(piece.ptype.toLowerCase()) == -1) {
+        if (!SYMBOLS.contains(piece.ptype.toLowerCase())) {
             return false;
         }
         if (! (SQUARES.containsKey(square))) {

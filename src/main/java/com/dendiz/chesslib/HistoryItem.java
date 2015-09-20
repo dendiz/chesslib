@@ -1,11 +1,12 @@
 package com.dendiz.chesslib;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * Created by dendiz on 25/07/15.
  */
-public class HistoryItem {
+public class HistoryItem implements Serializable {
     public Move move;
     public Map<String, Integer> kings;
     public String turn;

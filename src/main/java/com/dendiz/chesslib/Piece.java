@@ -1,9 +1,11 @@
 package com.dendiz.chesslib;
 
+import java.io.Serializable;
+
 /**
  * Created by dendiz on 25/07/15.
  */
-public class Piece {
+public class Piece implements Serializable {
     public String ptype;
     public String color;
 

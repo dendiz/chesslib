@@ -1,9 +1,11 @@
 package com.dendiz.chesslib;
 
+import java.io.Serializable;
+
 /**
  * Created by dendiz on 25/07/15.
  */
-public class Move {
+public class Move implements Serializable {
     public String color;
     public int from;
     public int to;
