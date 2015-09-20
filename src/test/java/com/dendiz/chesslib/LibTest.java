@@ -1,6 +1,7 @@
 package com.dendiz.chesslib;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class LibTest {
 
 
     @Test
+    @Ignore
     public void perfTest() {
         //chessLib.load("rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1");
         long start = System.currentTimeMillis();

@@ -1,5 +1,6 @@
 package com.dendiz.chesslib;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,6 +12,7 @@ public class TreeTest {
     List<Stack<Node>> stacks = new ArrayList<>();
 
     @Test
+    @Ignore
     public void test2() {
         chessLib.load("6k1/p1b3p1/4p2r/1Pp4b/3pPp1q/1P1P1P2/2P1QR2/R5KN b - - 0 1");
         chessLib.move("Qg5+");
@@ -20,6 +22,7 @@ public class TreeTest {
     }
 
     @Test
+    @Ignore
     public void test1() {
         chessLib.load("6k1/p1b3p1/4p2r/1Pp4b/3pPp1q/1P1P1P2/2P1QR2/R5KN b - - 0 1");
         Node root = new Node();
