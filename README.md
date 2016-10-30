@@ -7,15 +7,10 @@ mvn install:install-file -Dfile=target/chesslib-0.0.1-SNAPSHOT.jar -DgroupId=com
 chess game processing lib maven repo.
 
 # usage
+
+
 ```
-<repositories>
-    <repository>
-        <id>chesslib-mvn-repo</id>
-        <url>https://raw.github.com/dendiz/chesslib/mvn-repo/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-    </repository>
-</repositories>
+resolvers += "dendiz.com" at "http://mvn.dendiz.com/repository/internal"
+libraryDependencies ++= Seq("com.dendiz" % "chesslib" % "1.2")
+
 ```
